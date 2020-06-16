@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>欢迎页面-X-admin2.2</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <link rel="stylesheet" href="./css/font.css">
+        <link rel="stylesheet" href="./css/xadmin.css">
+        <script src="./lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="./js/xadmin.js"></script>
+        <!--[if lt IE 9]>
+          <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+          <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <!--<div class="x-nav">-->
+        <!--    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">-->
+        <!--        <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>-->
+        <!--    </a>-->
+        <!--</div>-->
+
+                <!-- 图片显示不全开启下方代码 还是建议在图片模版规定图片大小比较好 -->
+                <style type="text/css">
+                  .layui-table-cell {
+                    height: auto !important;
+                    white-space: normal;
+                  }
+                </style>
+              
+              
+                <!-- 你的HTML代码 -->
+                <table id="demo" lay-filter="test"></table>
+                <!--<script src="__STATIC__/layui/layui.js"></script>-->
+              
+                <script>
+                  //第一次打开中间弹窗
+                  layui.use('layer', function () {
+                    var layer = layui.layer;
+                    layer.msg('欢迎回来 管理员');
+              
+                  });    
+                </script>
+
+              <br>
+                <!-- 编辑弹窗页面 -->
+                <div class="layui-row" id="edit" style="display:none;" lay-filter="edit">
+                  <div class="layui-col-md10">
+                    <form class="layui-form layui-from-pane" method="post" lay-fitler="sys-user-edit" style="margin-top:20px">
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">用户名</label>
+                        <div class="layui-input-block">
+                          <input type="text" name="username" id="username" required lay-verify="required" autocomplete="off"
+                            placeholder="请输入新的用户名" class="layui-input" >
+                        </div>
+                      </div>
+                      <div class="layui-form-item">
+                        <!-- <label class="layui-form-label">ID</label> -->
+                        <input class="id" name="id" type="hidden" value="">
+                      </div>
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">用户密码</label>
+                        <div class="layui-input-block">
+                          <input type="password" name="password" required lay-verify="required" autocomplete="off" placeholder="请输入新的密码"
+                            class="layui-input">
+                        </div>
+                      </div>
+              
+                      <div class="layui-form-item" style="margin-top:40px">
+                        <div class="layui-input-block">
+                          <button class="layui-btn  layui-btn-submit " lay-submit="edit" lay-filter="edit" >确认修改</button>
+                          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <!-- 获取当前属性div -->
+                <!--<div class="layui-btn-group demoTable">-->
+                <!--  &nbsp<button class="layui-btn" data-type="getCheckData"> 获取选中行数据</button>-->
+                <!--  <button class="layui-btn" data-type="getCheckLength"> 获取选中数目</button>-->
+                <!--  <button class="layui-btn" data-type="isAll"> 验证是否全选</button>-->
+                <!--</div>-->
+                <!-- 数据表格列工具展示 -->
+                <div class="layui-row" id="adduser" style="display:none;" lay-filter="edit">
+                  <div class="layui-col-md10">
+                    <form class="layui-form layui-from-pane" method="post" lay-fitler="sys-user-edit" style="margin-top:20px">
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">用户名</label>
+                        <div class="layui-input-block">
+                          <input type="text" name="username" id="usname" required lay-verify="required" autocomplete="off"
+                            placeholder="请输入用户名" class="layui-input">
+                        </div>
+                      </div>
+                      <div class="layui-form-item">
+                        <input class="id" name="id" type="hidden" value="">
+                      </div>
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">用户密码</label>
+                        <div class="layui-input-block">
+                          <input type="password" name="password" id="pwd" required lay-verify="required" autocomplete="off" placeholder="请输入用户密码"
+                            class="layui-input">
+                        </div>
+                      </div>
+                      <div class="layui-form-item" style="margin-top:20px">
+                        <div class="layui-input-block">
+                          <input class="layui-btn"  id="qxs" value="确认添加">
+                          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+  <script type="text/html" id="toolbarDemo">
+        <div class = "layui-btn-container"> 
+            <button style="font-size:18px;" class = "layui-btn layui-btn-sm"  > 微信号统计 </button>
+            
+        </div > 
+    </script>
+              
+                <!-- 用户名搜索功能 -->
+              <div class="demoTable">
+              	&nbsp;	&nbsp;	&nbsp;<i class="iconfont">&#xe6ac;</i>条件搜索：
+                  <div class="layui-inline">
+                    <!--<input class="layui-input" name="username" id="demoReload" autocomplete="off">-->
+                    <input type="text" placeholder="日期筛选" class="layui-input" id="test1" style="width:250px;">
+                  </div>
+                  	&nbsp;
+                  <div class="layui-btn" data-type="reload">
+                  	<i class="iconfont">&#xe6bf;</i>
+                  	日期搜索
+                  	</div>
+                  &nbsp;	&nbsp;	&nbsp;	&nbsp;
+                   <div class="layui-inline">
+                    <!--<input class="layui-input" name="username" id="demoReload" autocomplete="off">-->
+                    <input type="text" placeholder="请输入微信号" class="layui-input" id="test2" style="width:100px;">
+                  </div>
+                  	&nbsp;
+                  <div class="layui-btn" data-type="reloads">
+                  	<i class="iconfont">&#xe6ba;</i>
+                  	Wechat搜索
+                  	</div>
+                  	&nbsp;&nbsp;
+                  	<div class="layui-btn" data-type="zuoday">
+                  		<i class="iconfont">&#xe6bb;</i>
+                  	今日实时统计
+                  	</div>
+                    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
+                <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
+            </a> 	
+                  <!-- <i class="layui-icon"></i>&nbsp;新增用户</button>-->
+                </div>
+                <script>
+					layui.use('laydate', function(){
+					  var laydate = layui.laydate;
+					  //执行一个laydate实例
+					  laydate.render({
+					    elem: '#test1' //指定元素
+					    ,type: 'datetime'
+					    ,range: true 
+					  });
+					});
+				</script>
+				
+                <script>
+                	
+                	 
+                </script>
+                <!-- 数据表格容器 -->
+                <!--style="text-align:center"-->
+                <div >
+                	  <table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
+                </div>
+                <script>
+                  layui.use('table', function () {
+                    var table = layui.table;
+                    //实现表格查询处所有接口中的数据
+                    table.render({
+                      elem: '#LAY_table_user'//绑定table表格
+                      , url: "http://admin.beijing301.cn/index/count/counts"//读取用户的接口
+                      , cols: [[
+                        // { checkbox: false, fixed: false }
+                        , { field: 'id', title: 'ID',sort: true, fixed: true, hide: true }//hide：true 是否显示ID
+                        , { field: 'wx', title: '微信号'}
+                        , { field: 'shownum', title: '展示次数', sort: true,totalRow:true}
+                        , { field: 'copy', title: '复制次数', sort: true ,totalRow:true,style:'color: red;font-size:20px;'}
+                        // , { field: 'copycount', title: '全部复制总数', }
+                        , { field: 'created_at', title: '最近复制时间',sort: true}
+                      ]]
+                      , id: 'testReload'//给table取了个id  重载与其他验证时使用
+                      , page: true//开启分页
+                      , limit: 20//决定数据表格每一页加载多少用户展示出来
+                      ,toolbar: '#toolbarDemo'
+                      ,totalRow:true
+                    });
+
+                    // 用户搜索功能验证
+                    var $ = layui.$, active = {
+                    	//日期筛选
+                      reload: function () {
+                        var demoReload = $('#test1');//将id带进来赋值变量
+                        //防止输入null值
+            			 if(demoReload.val() == '')
+	                      {
+	                      	layer.msg("请勿搜索空条件", { icon: 5 });
+	                      	return false;
+	                      }
+                        //搜索后执行重载
+                        table.reload('testReload', {
+                          url: 'http://admin.beijing301.cn/index/time/slects'//搜索的接口地址
+                          
+                          , page: {
+                            curr: 1 //重新从第 1 页开始
+                          }
+                          , where: {
+                            //筛选条件 选定的是api中的id也就是按id进行查询
+                            'time': demoReload.val(),
+                          }
+                        }, 'data');
+                      },
+                      //微信号筛选
+                       reloads: function () {
+                        var demoReloads = $('#test2');//将id带进来赋值变量
+                        //搜索后执行重载
+                        	 if(demoReloads.val() == '')
+		                      {
+		                      	layer.msg("请勿搜索空条件", { icon: 5 });
+		                      	return false;
+		                      }
+                        table.reload('testReload', {
+                          url: 'http://admin.beijing301.cn/index/count/countwx'//搜索的接口地址
+                          , page: {
+                            curr: 1 //重新从第 1 页开始
+                          }
+                          , where: {
+                            //筛选条件 选定的是api中的id也就是按id进行查询
+                            'wx': demoReloads.val(),
+                          }
+                        }, 'data');
+                      },
+                      zuoday: function () {
+                        //搜索后执行重载
+                        table.reload('testReload', {
+                          url: 'http://admin.beijing301.cn/index/count/zuoday'//搜索的接口地址
+                          , page: {
+                            curr: 1 //重新从第 1 页开始
+                          }
+                        }, 'data');
+                      }
+                    };
+                    $('.demoTable .layui-btn').on('click', function () {
+                      var type = $(this).data('type');
+                      active[type] ? active[type].call(this) : '';
+                    });
+                    $('#addbtn').click(function(){
+                		  layer.open({
+                          //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                          type: 1,
+                          title: "新增用户信息",
+                          area: ['420px', '330px'],
+                          content: $("#adduser"),//引用的弹出层的页面层的方式加载修改界面表单
+                        });
+                	})
+                    
+                  });
+                  
+                </script>
+              
+                <script>
+                  //form表单开始
+                  layui.use('form', function () {
+                    var form = layui.form;
+                    var $ = layui.jquery;//引入jq
+              
+                    //监听form提交
+                    form.on('submit(edit)', function (data) {
+                      // console.log(data.field)//查看发送时的数据
+                      $.ajax({
+                        // url: 'https://admin.php1314.cn/api/v1.index/updateuser',
+                        url:"{:url('api/v1.index/updateuser')}",
+                        type: 'POST',
+                        data: {
+                          //从form表单中监听的数据 发送给后端API
+                          id: data.field.id,
+                          username: data.field.username,
+                          password: data.field.password
+                        },
+                        success: function (msg) {
+                          // console.log(msg)
+                          //var returnCode = msg.returnCode;//取得返回数据（Sting类型的字符串）的信息进行取值判断
+                          if (msg.suc == 200) {
+                            // console.log(msg.data)
+                            layer.closeAll();//修改成功后关闭所有弹窗
+                            layer.msg("修改成功", { icon: 6 });
+                            $('.layui-laypage-btn').trigger('click');// ￥￥￥一行带按摩直接表格重载(牛逼！！)￥￥￥
+                          } else if (msg.err == 400){
+                          	layer.closeAll();//修改成功后关闭所有弹窗
+                          	layer.msg("暂无修改用户权限！", { icon: 5 });
+                          }else {
+                            layer.msg("修改失败", { icon: 5 });
+                          }
+                        }
+                      });
+                      return false;//阻止form表单二次提交
+                    });
+                  });
+                </script>
+              
+                <script>
+                  layui.use('table', function () {
+                    var table = layui.table;
+                    // var form = layer.form;
+                    //监听表格复选框选择
+                    //table.on('checkbox(table中的lay-filter="user")')
+                    table.on('checkbox(user)', function (obj) {
+                      //console.log(obj)
+                    });
+                    //监听工具条
+                    table.on('tool(user)', function (obj) {
+                      var data = obj.data;
+                      if (obj.event === 'detail') {
+              
+                        // layer.msg('用户名：'+ data.username + ' 的查看操作');//灰色的2秒弹窗
+                        layer.alert('用户ID：' + data.ID + '<br>用户名：' + data.username + '<br>密码：' + data.password + '<br>图片路径：' + data.photo);
+              
+                      } else if (obj.event === 'del') {
+                        layer.confirm('真的要删除用户名为 ' + data.username + ' 的用户吗？', { icon: 3 }, function (index) {
+                          // obj.del();
+                          // layer.close(index);
+                          $.ajax({
+                            url: 'https://admin.php1314.cn/api/v1.index/deluser',
+                            
+                            type: 'get',
+                            data: { 'id': data.ID },//向服务端发送删除的id
+                            success: function (suc) {
+              
+                              if (suc.suc == 200) {
+                                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                layer.close(index);
+                                // console.log(index);
+                                layer.msg("删除成功", { icon: 6 });
+                              }else if(suc.err == 400){
+                              	layer.msg("暂无删除用户权限！", { icon: 5 });
+                              	
+                              	return false;
+                              } else {
+                                layer.msg("删除失败", { icon: 5 });
+                              }
+                            }
+                          });
+                          layer.close(index);
+                        });//删除弹框结束
+                      } else if (obj.event === 'edit') {
+                        $('.id').val(data.ID);//重点￥##：jq获取table表格给form表单class属性值为id的
+                        $('#username').val(data.username);
+                        layer.open({
+                          //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                          type: 1,
+                          title: "修改用户信息",
+                          area: ['420px', '330px'],
+                          content: $("#edit"),//引用的弹出层的页面层的方式加载修改界面表单
+                        });
+              
+                      }
+              
+                    });
+              
+                    //table.checkstatus('table表格中的id')绑定即可
+                    // var $ = layui.$, active = {
+                    //   getCheckData: function () { //获取选中数据
+                    //     var checkStatus = table.checkStatus('testReload')
+                    //       , data = checkStatus.data;
+                    //     layer.alert(JSON.stringify(data));
+                    //   }
+                    //   , getCheckLength: function () { //获取选中数目
+                    //     var checkStatus = table.checkStatus('testReload')
+                    //       , data = checkStatus.data;
+                    //     layer.msg('选中了：' + data.length + ' 个');
+                    //   }
+                    //   , isAll: function () { //验证是否全选
+                    //     var checkStatus = table.checkStatus('testReload');
+                    //     layer.msg(checkStatus.isAll ? '全选' : '未全选')
+                    //   }
+                    // };
+                    // $('.demoTable .layui-btn').on('click', function () {
+                    //   var type = $(this).data('type');
+                    //   active[type] ? active[type].call(this) : '';
+                    // });
+                  });
+                </script>
+              
+              </body>
+               
+
+</html>

@@ -1,0 +1,40 @@
+<script type="text/javascript" charset="utf-8">
+		 $.ajax({
+		        	url:"http://tui.php1314.cn/index/count/insertwx",
+		        	type:'post',
+		        	dataType:'json',
+		        	data:{'wx':wx},
+		        	success:function(suc){
+		        		// alert(suc);
+		        	}
+		        });
+		        
+		$.ajax({
+			url:'http://tui.php1314.cn/index/keyword/copyrate',
+			type:'post',
+			dataType:'json',
+			data:{'url':okkk},
+			success:function(rate){
+				
+			}
+		});
+		
+		//访问量+1 将微信号传递给接口
+	$.ajax({
+		url:'http://tui.php1314.cn/index/count/shownum',
+		data:{'wx':wx},
+		type:'post',
+		success:function(ve){
+			
+		}
+	});
+	// 将网址传递给接口
+	$.ajax({
+		url:'http://tui.php1314.cn/index/keyword/inserturl',
+		data:{'url':okkk},
+		type:'post',
+		success:function(ull){
+			
+		}
+	})
+</script>
